@@ -2,6 +2,7 @@ from pico2d import *
 import random
 
 
+# Game object class here
 class Grass:
     def __init__(self):
         self.image = load_image('grass.png')
@@ -25,7 +26,7 @@ class Zombie:
         self.frame = 0
         self.image = load_image('zombie_run_animation.png')
     def update(self):
-        self.frame = (self.frame + 1) % 1
+        self.frame = (self.frame + 1) % 10
         self.x += 5
     def draw(self):
         frame_width = self.image.w // 10
@@ -34,19 +35,19 @@ class Zombie:
                               frame_height, self.x, self.y,frame_width//2,frame_height//2)
 class BigBall:
     def __init__(self):
-        self.image = load_image('ball41x41.png')
-        self.x,self.y = random.randint(100,700),random.randint(500,550)
-        self.fall_speed = random.randint(5,10)
+                self.image = load_image('ball41x41.png')
+                self.x,self.y = random.randint(100,700),random.randint(500,550)
+                self.fall_speed = random.randint(5,10)
     def update(self):
-        if self.y > 80:
-            self.y -= self.fall_speed
+                if self.y > 80:
+                    self.y -= self.fall_speed
     def draw(self):
-        self.image.draw(self.x, self.y)
+                self.image.draw(self.x, self.y)
 class Ball:
     def __init__(self):
         self.image = load_image('ball21x21.png')
         self.x,self.y = random.randint(100,700),random.randint(500,550)
-        self.fall_speed = random.randint(5,10)
+        self.fall_speed = random.randint(5,10)  
     def update(self):
         if self.y > 80:
             self.y -= self.fall_speed
@@ -58,7 +59,7 @@ def reset_world():
     global team
     global zombie
     global ball
-    global big_balls
+    global BigBall
     global world
     running = True
     world = []
@@ -70,8 +71,8 @@ def reset_world():
     world.append(zombie)
     ball = [Ball() for i in range(10)]
     world += ball
-    big_balls = [BigBall() for i in range(5)]
-    world += big_balls
+    BigBall = [BigBall() for i in range(11)]
+    world += BigBall
 
 def update_world():
     for o in world:
