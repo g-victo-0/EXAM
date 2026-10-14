@@ -83,6 +83,7 @@ def render_world():
     for o in world:
         o.draw()
     update_canvas()
+    update_canvas()
 
 def handle_events():
     global running
